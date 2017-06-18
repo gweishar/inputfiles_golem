@@ -8,6 +8,7 @@
   pore_pressure = pore_pressure
   temperature = temperature
   has_gravity = true
+  has_T_source_sink = true
   #has_lumped_mass_matrix = true
   gravity_acceleration = 9.8065
   initial_density_fluid = 1000.0
@@ -120,34 +121,10 @@
     initial_thermal_conductivity_solid = 3.2
     initial_heat_capacity_solid = 980
     T_source_sink = 4e-06
+    fluid_modulus = 14285714.29
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
-  #[./middle_sup_aquifer]
-  #  type = GolemMaterialTH
-  #  block = 1
-  #  initial_porosity = 0.3
-  #  initial_permeability = 1.2e-11
-  #  initial_density_solid = 2100
-  #  initial_thermal_conductivity_solid = 1.6
-  #  initial_heat_capacity_solid = 800
-  #  T_source_sink = 2.5e-07
-  #  output_properties = 'fluid_density fluid_viscosity'
-  #  outputs = out
-  #[../]
-  #[./South_Perth_Shale]
-  #  type = GolemMaterialTH
-  #  block = 2
-  #  initial_porosity = 0.1
-  #  initial_permeability = 1.0e-11
-  #  initial_density_solid = 2100
-  #  initial_thermal_conductivity_solid = 1.8
-  #  initial_thermal_conductivity_fluid = 1.5
-  #  initial_heat_capacity_solid = 1000
-  #  T_source_sink = 8e-07
-  #  output_properties = 'fluid_density fluid_viscosity'
-  #  outputs = out
-  #[../]
   [./cattamarra_Coal_Measures]
     type = GolemMaterialTH
     block = 1
@@ -157,6 +134,7 @@
     initial_thermal_conductivity_solid = 4.1
     initial_heat_capacity_solid = 1000
     T_source_sink = 5e-07
+    fluid_modulus = 142857142.9
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -169,6 +147,7 @@
     initial_thermal_conductivity_solid = 3.73
     initial_heat_capacity_solid = 1000
     T_source_sink = 4e-06
+    fluid_modulus = 142857142.9
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -181,6 +160,7 @@
     initial_thermal_conductivity_solid = 2.75
     initial_heat_capacity_solid = 775
     T_source_sink = 6e-07
+    fluid_modulus = 85714285.71
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -193,6 +173,7 @@
     initial_thermal_conductivity_solid = 2.29
     initial_heat_capacity_solid = 900
     T_source_sink = 1.5e-06
+    fluid_modulus = 171428571.4
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -205,6 +186,7 @@
     initial_thermal_conductivity_solid = 3.13
     initial_heat_capacity_solid = 900
     T_source_sink = 5e-07
+    fluid_modulus = 71428571.43
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -217,6 +199,7 @@
     initial_thermal_conductivity_solid = 3.85
     initial_heat_capacity_solid = 775
     T_source_sink = 6e-07
+    fluid_modulus = 57142857.14
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -229,6 +212,7 @@
     initial_thermal_conductivity_solid = 3.2
     initial_heat_capacity_solid = 980
     T_source_sink = 4e-06
+    fluid_modulus = 142857142.9
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -242,6 +226,7 @@
     initial_thermal_conductivity_fluid = 3.2 #calculated by hand
     initial_heat_capacity_solid = 980
     T_source_sink = 4e-06
+    fluid_modulus = 14285714.29
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -254,6 +239,7 @@
     initial_thermal_conductivity_solid = 2.88
     initial_heat_capacity_solid = 775
     T_source_sink = 1.5e-06
+    fluid_modulus = 57142857.14
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -267,6 +253,7 @@
     initial_thermal_conductivity_fluid = 3.2 #calculated by hand
     initial_heat_capacity_solid = 775
     T_source_sink = 6e-07
+    fluid_modulus = 285714285.7
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -279,18 +266,20 @@
     initial_thermal_conductivity_solid = 3.2
     initial_heat_capacity_solid = 980
     T_source_sink = 4e-06
+    fluid_modulus = 14285714.29
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
-  [./out] #CHECK VALUES
+  [./out_material] #CHECK VALUES
     type = GolemMaterialTH
     block = 12
-    initial_porosity = 0.1
-    initial_permeability = 1.0e-6
+    initial_porosity = 0.01
+    initial_permeability = 1.2e-18
     initial_density_solid = 2700
-    initial_thermal_conductivity_solid = 12
-    initial_heat_capacity_solid = 775
-    T_source_sink = 4e-07
+    initial_thermal_conductivity_solid = 3.2
+    initial_heat_capacity_solid = 980
+    T_source_sink = 4e-06
+    fluid_modulus = 14285714.29
     output_properties = 'fluid_density fluid_viscosity'
     outputs = out
   [../]
@@ -362,7 +351,7 @@
 [Outputs]
   [./out]
     type = Exodus
-    interval = 10
+    #interval = 10
   [../]
   [./console]
     type = Console

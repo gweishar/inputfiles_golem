@@ -112,7 +112,7 @@
     initial_thermal_conductivity_solid = 1.233333
     initial_heat_capacity_fluid = 4180
     initial_heat_capacity_solid = 920
-    initial_permeability = 1.0e-13
+    initial_permeability = 1.0e-10
     initial_fluid_viscosity = 0.0012389
     fluid_modulus = 4e+09
     output_properties = 'fluid_density fluid_viscosity'

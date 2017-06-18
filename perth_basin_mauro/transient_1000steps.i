@@ -350,7 +350,7 @@
 [Outputs]
   [./out]
     type = Exodus
-    interval = 50
+    #interval = 50
   [../]
   [./console]
     type = Console
