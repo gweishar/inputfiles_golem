@@ -1,21 +1,18 @@
-####  Golem Simple Geomodel ####
-
 [Mesh]
-  file = ic/ic_out.e
+  file = ../mesh/mesh.e
 []
 
 [GlobalParams]
   pore_pressure = pore_pressure
   temperature = temperature
   has_gravity = true
-  has_T_source_sink = true
-
   #has_lumped_mass_matrix = true
+  has_T_source_sink = true
   gravity_acceleration = 9.8065
   initial_density_fluid = 1000.0
-  initial_thermal_conductivity_fluid = 0.65
   initial_heat_capacity_fluid = 4.18e+03
   initial_fluid_viscosity = 1.0e-03
+  initial_thermal_conductivity_fluid = 0.65
   fluid_density_uo = fluid_density
   fluid_viscosity_uo = fluid_viscosity
   porosity_uo = porosity
@@ -26,12 +23,9 @@
 
 [Variables]
   [./pore_pressure]
-    initial_from_file_var = pore_pressure
-    initial_from_file_timestep = 2
+    initial_condition = 101325
   [../]
   [./temperature]
-    initial_from_file_var = temperature
-    initial_from_file_timestep = 2
   [../]
 []
 
@@ -55,20 +49,8 @@
     type = GolemKernelH
     variable = pore_pressure
   [../]
-  [./P_time]
-    type = GolemKernelTimeH
-    variable = pore_pressure
-  [../]
-  [./T_time]
-    type = GolemKernelTimeT
-    variable = temperature
-  [../]
   [./T_dif]
     type = GolemKernelT
-    variable = temperature
-  [../]
-  [./T_adv]
-    type = GolemKernelTH
     variable = temperature
   [../]
 []
@@ -111,7 +93,7 @@
     boundary = back
     value = 150
   [../]
-  [./T_bottom]
+  [./T_bottom_neumann]
     type = NeumannBC
     variable = temperature
     boundary = back
@@ -127,7 +109,7 @@
     initial_permeability = 1.0e-11
     initial_density_solid = 2650
     initial_thermal_conductivity_solid = 6.27
-    initial_heat_capacity_solid = 0.0790
+    initial_heat_capacity_solid = 790
     output_properties = 'fluid_density fluid_viscosity'
     T_source_sink = 5e-07
     fluid_modulus = 14285714.29
@@ -140,7 +122,7 @@
     initial_permeability = 1.0e-11
     initial_density_solid = 2360
     initial_thermal_conductivity_solid = 3.73
-    initial_heat_capacity_solid = 0.01000
+    initial_heat_capacity_solid = 1000
     output_properties = 'fluid_density fluid_viscosity'
     T_source_sink = 4e-06
     fluid_modulus = 14285714.29
@@ -153,7 +135,7 @@
     initial_permeability = 1.0e-11
     initial_density_solid = 2650
     initial_thermal_conductivity_solid = 2.09
-    initial_heat_capacity_solid = 0.0900
+    initial_heat_capacity_solid = 900
     output_properties = 'fluid_density fluid_viscosity'
     T_source_sink = 6e-07
     fluid_modulus = 14285714.29
@@ -163,10 +145,10 @@
 
 [UserObjects]
   [./fluid_density]
-    type = GolemFluidDensityIAPWS
+    type = GolemFluidDensityConstant
   [../]
   [./fluid_viscosity]
-    type = GolemFluidViscosityIAPWS
+    type = GolemFluidViscosityConstant
   [../]
   [./porosity]
     type = GolemPorosityConstant
@@ -218,19 +200,8 @@
 []
 
 [Executioner]
-  type = Transient
+  type = Steady
   solve_type = Newton
-  num_steps  = 100
-  dt = 3.15576e+07
-  #3.15576e+07 # 1 year
-  [./TimeStepper]
-   type = IterationAdaptiveDT
-   optimal_iterations = 6
-   iteration_window = 1
-   dt = 3.15576e+07
-   growth_factor = 2
-   cutback_factor = 0.5
- [../]
 []
 
 [Outputs]

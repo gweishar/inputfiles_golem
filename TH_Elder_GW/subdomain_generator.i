@@ -1,3 +1,4 @@
+
 [Mesh]
   # This MeshModifier currently only works with ReplicatedMesh.
   # For more information, refer to #2129.
@@ -11,23 +12,12 @@
 []
 
 [MeshModifiers]
-  [./bottom_m]
+  [./middle_node]
     type = BoundingBoxNodeSet
-    new_boundary = bottom_m
+    new_boundary = middle_node
+
     top_right = '500.0 0 0'
     bottom_left = '100.0 0 0'
-  [../]
-  [./bottom_r]
-    type = BoundingBoxNodeSet
-    new_boundary = bottom_r
-    top_right = '600.0 0 0'
-    bottom_left = '500.0 0 0'
-  [../]
-  [./bottom_l]
-    type = BoundingBoxNodeSet
-    new_boundary = bottom_l
-    top_right = '100.0 0 0'
-    bottom_left = '0.0 0 0'
   [../]
 []
 
@@ -54,7 +44,12 @@
     boundary = top
     value = 101325
   [../]
-
+  [./p_middle]
+    type = PresetBC
+    variable = pore_pressure
+    boundary = middle_node
+    value = 3013250
+  [../]
 []
 
 [Kernels]

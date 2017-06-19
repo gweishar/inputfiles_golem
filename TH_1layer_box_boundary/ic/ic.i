@@ -1,60 +1,26 @@
 [Mesh]
-  # This MeshModifier currently only works with ReplicatedMesh.
-  # For more information, refer to #2129.
-  type = GeneratedMesh
-  dim = 2
-  nx=25
-  ny=50
-  xmax = 600
-  ymax = 150
-  parallel_type = replicated
+  file = ../mesh/mesh_refined.e
 []
 
-[MeshModifiers]
-  [./bottom_m]
-    type = BoundingBoxNodeSet
-    new_boundary = bottom_m
-    top_right = '500.0 0 0'
-    bottom_left = '100.0 0 0'
-  [../]
-  [./bottom_r]
-    type = BoundingBoxNodeSet
-    new_boundary = bottom_r
-    top_right = '600.0 0 0'
-    bottom_left = '500.0 0 0'
-  [../]
-  [./bottom_l]
-    type = BoundingBoxNodeSet
-    new_boundary = bottom_l
-    top_right = '100.0 0 0'
-    bottom_left = '0.0 0 0'
-  [../]
+[GlobalParams]
+  pore_pressure = pore_pressure
+  has_gravity = true
+  #has_lumped_mass_matrix = true
+  gravity_acceleration = 9.8065
+  initial_density_fluid = 1000.0
+  initial_fluid_viscosity = 1.0e-03
+  fluid_density_uo = fluid_density
+  fluid_viscosity_uo = fluid_viscosity
+  porosity_uo = porosity
+  permeability_uo = permeability
+  #supg_uo = supg
+  #scaling_uo = scaling
 []
 
 [Variables]
   [./pore_pressure]
     initial_condition = 101325
   [../]
-[]
-
-[GlobalParams]
-  pore_pressure = pore_pressure
-  has_gravity = true
-  gravity_acceleration = 9.80665
-  fluid_density_uo = fluid_density
-  fluid_viscosity_uo = fluid_viscosity
-  porosity_uo = porosity
-  permeability_uo = permeability
-[]
-
-[BCs]
-  [./p_top]
-    type = PresetBC
-    variable = pore_pressure
-    boundary = top
-    value = 101325
-  [../]
-
 []
 
 [Kernels]
@@ -64,17 +30,25 @@
   [../]
 []
 
+
+
+[BCs]
+  [./p0_top]
+    type = PresetBC
+    variable = pore_pressure
+    boundary = front
+    value = 101325
+  [../]
+[]
+
 [Materials]
-  [./unit_non_adaptive]
+  [./bottom]
     type = GolemMaterialH
     block = 0
-    initial_density_fluid = 999.526088
-    initial_density_solid = 2480
-    initial_porosity = 0.4
-    initial_permeability = 1.0e-11
-    initial_fluid_viscosity = 0.0012389
-    fluid_modulus = 4e+09
- [../]
+    initial_porosity = 0.3
+    initial_permeability = 1.0e-9
+    initial_density_solid = 2360
+  [../]
 []
 
 [UserObjects]
@@ -87,10 +61,9 @@
   [./porosity]
     type = GolemPorosityConstant
   [../]
-[./permeability]
-  type = GolemPermeabilityConstant
-[../]
-
+  [./permeability]
+    type = GolemPermeabilityConstant
+  [../]
 []
 
 [Preconditioning]
@@ -135,20 +108,17 @@
 
 [Executioner]
   type = Steady
-  solve_type = 'PJFNK' # 'NEWTON'
-  l_max_its  = 400
-  l_tol      = 1e-12
-  nl_max_its = 15
-  nl_rel_tol = 1e-5
-  nl_abs_tol = 1e-7
+  solve_type = Newton
 []
 
 [Outputs]
-  print_linear_residuals = true
-  print_perf_log = true
-  exodus         = true
-[]
-
-[Debug]
-  show_var_residual_norms = true
+  [./out]
+    type = Exodus
+  [../]
+  [./console]
+    type = Console
+    perf_log = true
+    output_linear = false
+    output_nonlinear = true
+  [../]
 []
