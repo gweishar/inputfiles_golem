@@ -157,7 +157,7 @@
   scheme = crank-nicolson
   solve_type = Newton
   num_steps  = 5000
-  dt = 300
+  dt = 700
   l_max_its = 250
   nl_max_its = 100
   nl_abs_tol = 1e-05

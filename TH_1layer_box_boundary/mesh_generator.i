@@ -4,9 +4,9 @@
 [Mesh]
   type = GeneratedMesh
   dim = 3
-  nx = 10
-  ny = 10
-  nz = 10
+  nx = 150
+  ny = 150
+  nz = 150
   ymin=0
   xmin=0
   zmin= -10
@@ -88,7 +88,7 @@
     type = PresetBC
     variable = temperature
     boundary = back
-    value = 0.03
+    value = 50
   [../]
 []
 
@@ -163,5 +163,5 @@
 
 [Outputs]
   exodus = true
-  file_base = mesh/mesh_coarse
+  file_base = mesh/mesh_refined
 []
