@@ -27,11 +27,11 @@
 #BSUB -a openmpi
 
 ### Request number of slots
-#BSUB -n 24
+#BSUB -n 16
 
 cd $HOME/projects/golem-devel/inputfiles_golem/TH_1layer_box_boundary/
-mpirun -n 8 ../.././golem-opt -i mesh_generator.i
+mpirun -n 16 ../.././golem-opt -i mesh_generator.i
 cd ic
-mpirun -n 8 ../../.././golem-opt -i ic.i
+mpirun -n 16 ../../.././golem-opt -i ic.i
 cd ..
-mpirun -n 24 ../.././golem-opt -i transient_Pe2.i
+mpirun -n 16 ../.././golem-opt -i transient_Pe2.i
