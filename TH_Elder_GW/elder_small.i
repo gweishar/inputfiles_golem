@@ -187,6 +187,7 @@
 [Executioner]
   type = Transient
   solve_type =  'NEWTON' # 'PJFNK'
+  #scheme = crank-nicolson
   num_steps  = 500
   dt = 3.15576e+06
   l_max_its = 250
