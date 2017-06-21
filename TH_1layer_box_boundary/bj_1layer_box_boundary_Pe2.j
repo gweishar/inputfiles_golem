@@ -34,4 +34,4 @@ mpirun -n 16 ../.././golem-opt -i mesh_generator.i
 cd ic
 mpirun -n 16 ../../.././golem-opt -i ic.i
 cd ..
-mpirun -n 16 ../.././golem-opt -i transient_Pe2.i
+mpirun -n 16 ../.././golem-opt -i transient_cluster.i

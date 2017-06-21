@@ -123,7 +123,7 @@
     type = GolemMaterialTH
     block = 0
     initial_porosity = 0.3
-    initial_permeability = 1.0e-10
+    initial_permeability = 5e-10
     initial_density_solid = 2360
     initial_thermal_conductivity_solid = 3.73
     initial_heat_capacity_solid = 1000
@@ -192,8 +192,8 @@
   type = Transient
   scheme = crank-nicolson
   solve_type = Newton
-  num_steps  = 5000
-  dt = 700
+  num_steps  = 500
+  dt = 70000
   l_max_its = 250
   nl_max_its = 100
   nl_abs_tol = 1e-05
@@ -203,7 +203,7 @@
 [Outputs]
   [./out]
     type = Exodus
-    interval = 10
+    #interval = 10
   [../]
   [./console]
     type = Console
