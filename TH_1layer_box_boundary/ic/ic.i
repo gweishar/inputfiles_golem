@@ -1,5 +1,5 @@
 [Mesh]
-  file = ../mesh/mesh_coarse.e
+  file = ../mesh/mesh_refined.e
 []
 
 [GlobalParams]
