@@ -192,8 +192,8 @@
   type = Transient
   scheme = crank-nicolson
   solve_type = Newton
-  num_steps  = 5000
-  dt = 700
+  num_steps  = 500
+  dt = 7000
   l_max_its = 250
   nl_max_its = 100
   nl_abs_tol = 1e-05

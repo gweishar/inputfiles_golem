@@ -4,20 +4,32 @@
   # For more information, refer to #2129.
   type = GeneratedMesh
   dim = 2
-  nx=25
-  ny=50
-  xmax = 600
-  ymax = 150
+  nx=50
+  ny=25
+  xmax = 2000
+  ymax = 1000
   parallel_type = replicated
 []
 
 [MeshModifiers]
-  [./middle_node]
+  active = ''
+  [./bottom_middle]
     type = BoundingBoxNodeSet
-    new_boundary = middle_node
-
-    top_right = '500.0 0 0'
-    bottom_left = '100.0 0 0'
+    new_boundary = bottom_m
+    top_right = '2.5 0 0'
+    bottom_left = '0.5 0 0'
+  [../]
+  [./bottom_l]
+    type = BoundingBoxNodeSet
+    new_boundary = bottom_l
+    top_right = '0.5 0 0'
+    bottom_left = '0.0 0 0'
+  [../]
+  [./bottom_r]
+    type = BoundingBoxNodeSet
+    new_boundary = bottom_r
+    top_right = '3.0 0 0'
+    bottom_left = '2.5 0 0'
   [../]
 []
 
@@ -43,12 +55,6 @@
     variable = pore_pressure
     boundary = top
     value = 101325
-  [../]
-  [./p_middle]
-    type = PresetBC
-    variable = pore_pressure
-    boundary = middle_node
-    value = 3013250
   [../]
 []
 
@@ -142,6 +148,7 @@
   print_linear_residuals = true
   print_perf_log = true
   exodus         = true
+  file_base = mesh/mesh_small
 []
 
 [Debug]

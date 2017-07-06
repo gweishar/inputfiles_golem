@@ -1,5 +1,5 @@
 [Mesh]
-  file = ../mesh/mesh_refined.e
+  file = ../mesh/mesh_coarse.e
 []
 
 [GlobalParams]
@@ -46,7 +46,7 @@
     type = GolemMaterialH
     block = 0
     initial_porosity = 0.3
-    initial_permeability = 5e-10
+    initial_permeability = 5e-11
     initial_density_solid = 2360
   [../]
 []

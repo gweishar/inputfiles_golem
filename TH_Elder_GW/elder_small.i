@@ -3,6 +3,14 @@
   file = ic/ic_small_out.e
 []
 
+[MeshModifiers]
+[./POINT0]
+  type = AddExtraNodeset
+  new_boundary = 'point_0'
+  coord = '0.0 0.0'
+[../]
+[]
+
 [Variables]
   [./pore_pressure]
     initial_from_file_var = pore_pressure
@@ -46,6 +54,12 @@
     boundary = top
     value = 101325
   [../]
+  #[./p_top]
+  #  type = PresetBC
+  #  variable = pore_pressure
+  #  boundary = point_0
+  #  value = 0
+  #[../]
   [./T_top]
     type = PresetBC
     variable = temperature
@@ -56,7 +70,7 @@
     type = PresetBC
     variable = temperature
     boundary = 'bottom_l bottom_r'
-    value =  12
+    value =  20
   [../]
   [./T_bottom_anomaly]
     type = PresetBC
@@ -118,7 +132,7 @@
     initial_thermal_conductivity_solid = 1.233333
     initial_heat_capacity_fluid = 4180
     initial_heat_capacity_solid = 920
-    initial_permeability = 1.0e-10
+    initial_permeability = 1.0e-9
     initial_fluid_viscosity = 0.0012389
     fluid_modulus = 4e+09
     output_properties = 'fluid_density fluid_viscosity'
@@ -187,9 +201,9 @@
 [Executioner]
   type = Transient
   solve_type =  'NEWTON' # 'PJFNK'
-  #scheme = crank-nicolson
-  num_steps  = 500
-  dt = 3.15576e+06
+  scheme = crank-nicolson
+  num_steps  = 1000
+  dt = 10000
   l_max_its = 250
   nl_max_its = 100
   nl_abs_tol = 1e-05

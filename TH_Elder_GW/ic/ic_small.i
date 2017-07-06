@@ -1,34 +1,5 @@
 [Mesh]
-  # This MeshModifier currently only works with ReplicatedMesh.
-  # For more information, refer to #2129.
-  type = GeneratedMesh
-  dim = 2
-  nx=25
-  ny=50
-  xmax = 600
-  ymax = 150
-  parallel_type = replicated
-[]
-
-[MeshModifiers]
-  [./bottom_m]
-    type = BoundingBoxNodeSet
-    new_boundary = bottom_m
-    top_right = '500.0 0 0'
-    bottom_left = '100.0 0 0'
-  [../]
-  [./bottom_r]
-    type = BoundingBoxNodeSet
-    new_boundary = bottom_r
-    top_right = '600.0 0 0'
-    bottom_left = '500.0 0 0'
-  [../]
-  [./bottom_l]
-    type = BoundingBoxNodeSet
-    new_boundary = bottom_l
-    top_right = '100.0 0 0'
-    bottom_left = '0.0 0 0'
-  [../]
+  file= ../mesh/mesh_small.e
 []
 
 [Variables]
@@ -54,7 +25,12 @@
     boundary = top
     value = 101325
   [../]
-
+  #[./p_bottom]
+  #  type = PresetBC
+  #  variable = pore_pressure
+  #  boundary = bottom
+  #  value = 1.0e7
+  #[../]
 []
 
 [Kernels]
@@ -70,10 +46,10 @@
     block = 0
     initial_density_fluid = 999.526088
     initial_density_solid = 2480
-    initial_porosity = 0.4
-    initial_permeability = 1.0e-11
+    initial_porosity = 0.1
+    initial_permeability = 1.0e-12
     initial_fluid_viscosity = 0.0012389
-    fluid_modulus = 4e+09
+    fluid_modulus = 14285714.29
  [../]
 []
 
