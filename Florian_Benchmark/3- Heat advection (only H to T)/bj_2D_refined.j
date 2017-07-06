@@ -31,6 +31,6 @@
 cd $HOME/projects/golem-devel/inputfiles_golem/Florian_Benchmark/3-\ Heat\ advection\ \(only\ H\ to\ T\)/
 mpirun -n 16 ../.././golem-opt -i mesh_generator.i
 cd ic
-mpirun -n 16 ../../.././golem-opt -i ic_refined.i
+mpirun -n 16 ../../../.././golem-opt -i ic_refined.i
 cd ..
 mpirun -n 16 ../../.././golem-opt -i TH_2D_refined.i
