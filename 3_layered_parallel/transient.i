@@ -128,11 +128,9 @@
     initial_permeability = 1.0e-11
     initial_density_solid = 2650
     initial_thermal_conductivity_solid = 6.27
-    initial_heat_capacity_solid = 0.0790
-    output_properties = 'fluid_density fluid_viscosity'
+    initial_heat_capacity_solid = 790
     T_source_sink = 5e-07
     fluid_modulus = 14285714.29
-    outputs = out
   [../]
   [./bottom]
     type = GolemMaterialTH
@@ -141,11 +139,9 @@
     initial_permeability = 1.0e-11
     initial_density_solid = 2360
     initial_thermal_conductivity_solid = 3.73
-    initial_heat_capacity_solid = 0.01000
-    output_properties = 'fluid_density fluid_viscosity'
+    initial_heat_capacity_solid = 1000
     T_source_sink = 4e-06
     fluid_modulus = 14285714.29
-    outputs = out
   [../]
   [./top]
     type = GolemMaterialTH
@@ -154,11 +150,9 @@
     initial_permeability = 1.0e-11
     initial_density_solid = 2650
     initial_thermal_conductivity_solid = 2.09
-    initial_heat_capacity_solid = 0.0900
-    output_properties = 'fluid_density fluid_viscosity'
+    initial_heat_capacity_solid = 900
     T_source_sink = 6e-07
     fluid_modulus = 14285714.29
-    outputs = out
   [../]
 []
 
@@ -221,14 +215,14 @@
 [Executioner]
   type = Transient
   solve_type = Newton
-  num_steps  = 5000
-  dt = 3.15576e+07
+  num_steps  = 15000
+  dt = 3.15576e+08
   #3.15576e+07 # 1 year
   [./TimeStepper]
    type = IterationAdaptiveDT
    optimal_iterations = 6
  iteration_window = 1
-   dt = 3.15576e+06
+   dt = 3.15576e+08
    growth_factor = 2
  cutback_factor = 0.5
  [../]
@@ -237,6 +231,7 @@
 [Outputs]
   [./out]
     type = Exodus
+    interval = 100
   [../]
   [./console]
     type = Console

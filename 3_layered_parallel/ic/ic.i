@@ -112,10 +112,8 @@
     initial_density_solid = 2650
     initial_thermal_conductivity_solid = 6.27
     initial_heat_capacity_solid = 790
-    output_properties = 'fluid_density fluid_viscosity'
     T_source_sink = 5e-07
     fluid_modulus = 14285714.29
-    outputs = out
   [../]
   [./bottom]
     type = GolemMaterialTH
@@ -125,10 +123,8 @@
     initial_density_solid = 2360
     initial_thermal_conductivity_solid = 3.73
     initial_heat_capacity_solid = 1000
-    output_properties = 'fluid_density fluid_viscosity'
     T_source_sink = 4e-06
     fluid_modulus = 14285714.29
-    outputs = out
   [../]
   [./top]
     type = GolemMaterialTH
@@ -138,10 +134,8 @@
     initial_density_solid = 2650
     initial_thermal_conductivity_solid = 2.09
     initial_heat_capacity_solid = 900
-    output_properties = 'fluid_density fluid_viscosity'
     T_source_sink = 6e-07
     fluid_modulus = 14285714.29
-    outputs = out
   [../]
 []
 

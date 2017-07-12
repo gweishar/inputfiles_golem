@@ -9,7 +9,7 @@
     initial_from_file_timestep = 2
   [../]
   [./temperature]
-    initial_condition = 19
+    initial_condition = 50
   [../]
 []
 
