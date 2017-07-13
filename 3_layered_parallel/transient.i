@@ -2,7 +2,6 @@
 
 [Mesh]
   file = ic/ic_out.e
-
 []
 
 [GlobalParams]
@@ -10,7 +9,6 @@
   temperature = temperature
   has_gravity = true
   has_T_source_sink = true
-
   #has_lumped_mass_matrix = true
   gravity_acceleration = 9.8065
   initial_density_fluid = 1000.0
@@ -31,8 +29,7 @@
     initial_from_file_timestep = 2
   [../]
   [./temperature]
-    initial_from_file_var = temperature
-    initial_from_file_timestep = 2
+    initial_condition = 19
   [../]
 []
 
@@ -110,13 +107,7 @@
     type = PresetBC
     variable = temperature
     boundary = back
-    value = 150
-  [../]
-  [./T_bottom]
-    type = NeumannBC
-    variable = temperature
-    boundary = back
-    value = 0.03
+    value = 170
   [../]
 []
 

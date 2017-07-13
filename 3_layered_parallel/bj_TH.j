@@ -27,9 +27,9 @@
 #BSUB -a openmpi
 
 ### Request number of slots
-#BSUB -n 16
+#BSUB -n 24
 
 cd $HOME/projects/golem-devel/inputfiles_golem/3_layered_parallel/ic
-mpirun -n 16 ../../.././golem-opt -i ic.i
+mpirun -n 24 ../../.././golem-opt -i ic.i
 cd ..
-mpirun -n 16 ../.././golem-opt -i transient.i
+mpirun -n 24 ../.././golem-opt -i transient.i
