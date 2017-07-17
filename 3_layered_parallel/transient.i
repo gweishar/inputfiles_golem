@@ -115,7 +115,7 @@
   [./middle]
     type = GolemMaterialTH
     block = 0
-    initial_porosity = 0.4
+    initial_porosity = 0.21
     initial_permeability = 1.0e-11
     initial_density_solid = 2650
     initial_thermal_conductivity_solid = 6.27
@@ -126,7 +126,7 @@
   [./bottom]
     type = GolemMaterialTH
     block = 1
-    initial_porosity = 0.3
+    initial_porosity = 0.2
     initial_permeability = 1.0e-11
     initial_density_solid = 2360
     initial_thermal_conductivity_solid = 3.73
@@ -137,7 +137,7 @@
   [./top]
     type = GolemMaterialTH
     block = 2
-    initial_porosity = 0.2
+    initial_porosity = 0.15
     initial_permeability = 1.0e-11
     initial_density_solid = 2650
     initial_thermal_conductivity_solid = 2.09
@@ -212,10 +212,10 @@
   [./TimeStepper]
    type = IterationAdaptiveDT
    optimal_iterations = 6
- iteration_window = 1
+   iteration_window = 1
    dt = 3.15576e+08
    growth_factor = 2
- cutback_factor = 0.5
+   cutback_factor = 0.5
  [../]
 []
 

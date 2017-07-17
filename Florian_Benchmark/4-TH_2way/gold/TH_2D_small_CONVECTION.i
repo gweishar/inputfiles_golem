@@ -1,6 +1,6 @@
 # Set up for the Elder problem
 [Mesh]
-  file = ic/ic_TH_out.e
+  file = ic/ic_small_out.e
 []
 
 [Variables]
@@ -9,8 +9,7 @@
     initial_from_file_timestep = 2
   [../]
   [./temperature]
-    initial_from_file_var = pore_pressure
-    initial_from_file_timestep = 2
+    initial_condition = 19
   [../]
 []
 
@@ -41,23 +40,6 @@
   #supg_uo = supg
 []
 
-[Functions]
-  [./T_ic_func]
-    type = ParsedFunction
-    value = '(y/500)*sin(x/1000)*19+19'
-    #vars = 'a b c'
-    #vals = '20 170 5500'
-  [../]
-[]
-
-[ICs]
-  [./T_ic]
-    type = FunctionIC
-    variable = temperature
-    function = T_ic_func
-  [../]
-[]
-
 [BCs]
   [./p_top]
     type = PresetBC
@@ -77,15 +59,15 @@
     boundary = bottom
     value = 50
   [../]
-  #[./T_no_bc]
-  #  type = GolemConvectiveTHBC
-  #  variable = temperature
-  #  boundary = 'right left'
-  #[../]
+  [./T_no_bc]
+    type = GolemConvectiveTHBC
+    variable = temperature
+    boundary = 'right left'
+  [../]
 []
 
 [Kernels]
-  #active = 'T_time darcy p_time T_adv'
+  active = 'T_time darcy p_time T_adv'
   [./p_time]
     type = GolemKernelTimeH
     variable = pore_pressure
@@ -105,7 +87,7 @@
   [./T_adv]
     type = GolemKernelTH
     variable = temperature
-    is_conservative = false
+    is_conservative = true
   [../]
 []
 
@@ -141,7 +123,7 @@
     initial_thermal_conductivity_solid = 2.7 # was 2.7 before
     initial_heat_capacity_fluid = 4180
     initial_heat_capacity_solid = 920
-    initial_permeability = 2.0e-13
+    initial_permeability = 1.0e-12
     initial_fluid_viscosity = 0.0012389
     fluid_modulus = 14285714.29
     # fluid_modulus = 14285.71429
@@ -163,10 +145,13 @@
   [./permeability]
     type = GolemPermeabilityConstant
   [../]
+  [./supg]
+    type = GolemSUPG
+  [../]
 []
 
 [Preconditioning]
-  active = ''
+  #active = ''
   [./FSP]
     type = FSP
     topsplit = 'HT'
@@ -214,7 +199,7 @@
   solve_type =  'NEWTON' # 'PJFNK'
   scheme = crank-nicolson
   num_steps  = 15000
-  #dt = 3.15576e+08
+  dt = 3.15576e+08
   l_max_its = 250
   nl_max_its = 100
   nl_abs_tol = 1e-05
@@ -222,18 +207,10 @@
   petsc_options = '-snes_mf_operator' #-ksp_monitor'
   petsc_options_iname = '-pc_type -pc_hypre_type'
   petsc_options_value = 'hypre boomeramg'
-  [./TimeStepper]
-   type = IterationAdaptiveDT
-   optimal_iterations = 6
-   iteration_window = 1
-   dt = 3.15576e+08
-   growth_factor = 2
-   cutback_factor = 0.5
-  [../]
 []
 
 [Outputs]
-  #interval = 10
+  interval = 10
   [./out]
     type = Exodus
   [../]

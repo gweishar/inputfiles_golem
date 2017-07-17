@@ -8,7 +8,7 @@
 
 ### File / path where STDOUT & STDERR will be written
 ###    %J is the job ID, %I is the array ID
-#BSUB -o $HOME/projects/golem-devel/job_logs/3_layered_parallel.%J.%I
+#BSUB -o /home/gg188062/projects/golem-devel/job_logs/3_layered_parallel.%J.%I
 
 ### Send email when job is done
 #BSUB -u gweishar@gmail.com

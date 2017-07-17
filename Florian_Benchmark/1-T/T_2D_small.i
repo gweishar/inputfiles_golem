@@ -118,7 +118,7 @@
     initial_thermal_conductivity_solid = 2.7 # was 2.7 before
     initial_heat_capacity_fluid = 4180
     initial_heat_capacity_solid = 920
-    initial_permeability = 1.0e-12
+    initial_permeability = 2.0e-13
     initial_fluid_viscosity = 0.0012389
     fluid_modulus = 14285714.29
     # fluid_modulus = 14285.71429
