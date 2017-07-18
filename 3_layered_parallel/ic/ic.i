@@ -46,7 +46,7 @@
     type = GolemMaterialH
     block = 0
     initial_porosity = 0.21
-    initial_permeability = 1.0e-11
+    initial_permeability = 3.0e-14
     initial_density_solid = 2650
     fluid_modulus = 14285714.29
   [../]
@@ -54,7 +54,7 @@
     type = GolemMaterialH
     block = 1
     initial_porosity = 0.2
-    initial_permeability = 1.0e-11
+    initial_permeability = 3.0e-14
     initial_density_solid = 2360
     fluid_modulus = 14285714.29
   [../]
@@ -62,7 +62,7 @@
     type = GolemMaterialH
     block = 2
     initial_porosity = 0.15
-    initial_permeability = 1.0e-11
+    initial_permeability = 3.0e-14
     initial_density_solid = 2650
     fluid_modulus = 14285714.29
   [../]

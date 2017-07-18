@@ -116,9 +116,9 @@
     type = GolemMaterialTH
     block = 0
     initial_porosity = 0.21
-    initial_permeability = 1.0e-11
+    initial_permeability = 3.0e-14
     initial_density_solid = 2650
-    initial_thermal_conductivity_solid = 6.27
+    initial_thermal_conductivity_solid = 8.27
     initial_heat_capacity_solid = 790
     T_source_sink = 5e-07
     fluid_modulus = 14285714.29
@@ -127,9 +127,9 @@
     type = GolemMaterialTH
     block = 1
     initial_porosity = 0.2
-    initial_permeability = 1.0e-11
+    initial_permeability = 3.0e-14
     initial_density_solid = 2360
-    initial_thermal_conductivity_solid = 3.73
+    initial_thermal_conductivity_solid = 10.73
     initial_heat_capacity_solid = 1000
     T_source_sink = 4e-06
     fluid_modulus = 14285714.29
@@ -138,9 +138,9 @@
     type = GolemMaterialTH
     block = 2
     initial_porosity = 0.15
-    initial_permeability = 1.0e-11
+    initial_permeability = 3.0e-14
     initial_density_solid = 2650
-    initial_thermal_conductivity_solid = 2.09
+    initial_thermal_conductivity_solid = 12.09
     initial_heat_capacity_solid = 900
     T_source_sink = 6e-07
     fluid_modulus = 14285714.29
