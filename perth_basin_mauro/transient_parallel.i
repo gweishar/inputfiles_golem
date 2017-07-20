@@ -353,6 +353,6 @@
     perf_log = true
     output_linear = false
     output_nonlinear = true
-    #file_base = transient_1000steps_out.e
+    file_base = transient_parallel_int100
   [../]
 []
