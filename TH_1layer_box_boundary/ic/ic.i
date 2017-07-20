@@ -8,7 +8,7 @@
   #has_lumped_mass_matrix = true
   gravity_acceleration = 9.8065
   initial_density_fluid = 1000.0
-  initial_fluid_viscosity = 1.0e-03
+  initial_fluid_viscosity = 0.0012389
   fluid_density_uo = fluid_density
   fluid_viscosity_uo = fluid_viscosity
   porosity_uo = porosity
@@ -45,9 +45,9 @@
   [./bottom]
     type = GolemMaterialH
     block = 0
-    initial_porosity = 0.3
-    initial_permeability = 5e-11
-    initial_density_solid = 2360
+    initial_porosity = 0.4
+    initial_permeability = 1e-10
+    initial_density_solid = 2480
   [../]
 []
 

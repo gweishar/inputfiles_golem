@@ -1,7 +1,11 @@
 ####  Golem Simple Geomodel ####
 
 [Mesh]
-  file = ic/ic_out.e
+  type = FileMesh
+  file = ic_parallel/ic_parallel_out.e
+  nemesis = true
+  boundary_id = '0 1 2 3 4 5'
+  boundary_name = 'back bottom right top left front'
 []
 
 [GlobalParams]
@@ -9,7 +13,7 @@
   temperature = temperature
   has_gravity = true
   has_T_source_sink = true
-  #has_lumped_mass_matrix = true
+  has_lumped_mass_matrix = true
   gravity_acceleration = 9.8065
   initial_density_fluid = 1000.0
   initial_heat_capacity_fluid = 4.18e+03
@@ -20,7 +24,7 @@
   porosity_uo = porosity
   permeability_uo = permeability
   #supg_uo = supg
-  #scaling_uo = scaling
+  scaling_uo = scaling
 []
 
 [Variables]
@@ -44,6 +48,10 @@
     family = MONOMIAL
   [../]
   [./vz]
+    order = CONSTANT
+    family = MONOMIAL
+  [../]
+  [./entropy_production]
     order = CONSTANT
     family = MONOMIAL
   [../]
@@ -88,6 +96,12 @@
     variable = vz
     component = 2
   [../]
+  [./entropy_production]
+   type = EntropyProduction
+   variable = entropy_production
+   #execute_on = timestep_end
+   temp = temperature
+ [../]
 []
 
 [BCs]
@@ -95,7 +109,7 @@
     type = PresetBC
     variable = pore_pressure
     boundary = front
-    value = 101325
+    value = 0.101325
   [../]
   [./T0_top]
     type = PresetBC
@@ -104,7 +118,7 @@
     value = 19
   [../]
   [./T_bottom]
-    type = NeumannBC
+    type = GolemHeatFlowBC
     variable = temperature
     boundary = back
     value = 0.03
@@ -122,8 +136,6 @@
     initial_heat_capacity_solid = 980
     T_source_sink = 4e-06
     fluid_modulus = 14285714.29
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./cattamarra_Coal_Measures]
     type = GolemMaterialTH
@@ -135,8 +147,6 @@
     initial_heat_capacity_solid = 1000
     T_source_sink = 5e-07
     fluid_modulus = 142857142.9
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./defaultCover] #CHECK VALUES
     type = GolemMaterialTH
@@ -148,8 +158,6 @@
     initial_heat_capacity_solid = 1000
     T_source_sink = 4e-06
     fluid_modulus = 142857142.9
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./eneabba_Fm]
     type = GolemMaterialTH
@@ -161,8 +169,6 @@
     initial_heat_capacity_solid = 775
     T_source_sink = 6e-07
     fluid_modulus = 85714285.71
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./kockatea_Shale]
     type = GolemMaterialTH
@@ -174,8 +180,6 @@
     initial_heat_capacity_solid = 900
     T_source_sink = 1.5e-06
     fluid_modulus = 171428571.4
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./late_Permian]
     type = GolemMaterialTH
@@ -187,8 +191,6 @@
     initial_heat_capacity_solid = 900
     T_source_sink = 5e-07
     fluid_modulus = 71428571.43
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./lesueur_Ss]
     type = GolemMaterialTH
@@ -200,8 +202,6 @@
     initial_heat_capacity_solid = 775
     T_source_sink = 6e-07
     fluid_modulus = 57142857.14
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./neocomian_Unc] #CHECK THESE VALUES
     type = GolemMaterialTH
@@ -213,8 +213,6 @@
     initial_heat_capacity_solid = 980
     T_source_sink = 4e-06
     fluid_modulus = 142857142.9
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./topo_and_bathy] # CHECK THESE VALUES
     type = GolemMaterialTH
@@ -227,8 +225,6 @@
     initial_heat_capacity_solid = 980
     T_source_sink = 4e-06
     fluid_modulus = 14285714.29
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./woodada_Fm]
     type = GolemMaterialTH
@@ -240,8 +236,6 @@
     initial_heat_capacity_solid = 775
     T_source_sink = 1.5e-06
     fluid_modulus = 57142857.14
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./yarragadee_Fm]
     type = GolemMaterialTH
@@ -254,8 +248,6 @@
     initial_heat_capacity_solid = 775
     T_source_sink = 6e-07
     fluid_modulus = 285714285.7
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./yilgarn]
     type = GolemMaterialTH
@@ -267,8 +259,6 @@
     initial_heat_capacity_solid = 980
     T_source_sink = 4e-06
     fluid_modulus = 14285714.29
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
   [./out_material] #CHECK VALUES
     type = GolemMaterialTH
@@ -280,12 +270,17 @@
     initial_heat_capacity_solid = 980
     T_source_sink = 4e-06
     fluid_modulus = 14285714.29
-    output_properties = 'fluid_density fluid_viscosity'
-    outputs = out
   [../]
 []
 
 [UserObjects]
+  [./scaling]
+    type = GolemScaling
+    characteristic_time = 3.15576e+07
+    characteristic_length = 1.0
+    characteristic_temperature = 1.0
+    characteristic_stress = 1.0e+06
+  [../]
   [./fluid_density]
     type = GolemFluidDensityIAPWS
   [../]
@@ -316,7 +311,7 @@
        petsc_options_value = 'fgmres
                               1.0e-12 100
                               newtonls cp
-                              1.0e-04 0 1000'
+                              1.0e-04 0 1000' # basic instead of linesearch cp
      [../]
      [./H]
        vars = 'pore_pressure'
@@ -345,13 +340,13 @@
   type = Transient
   solve_type = Newton
   num_steps  = 1000
-  dt = 3.15576e+07 # 1 year
+  dt = 1 # 1 year
 []
 
 [Outputs]
   [./out]
     type = Exodus
-    #interval = 10
+    interval = 10
   [../]
   [./console]
     type = Console

@@ -12,7 +12,7 @@
   gravity_acceleration = 9.8065
   initial_density_fluid = 1000.0
   initial_heat_capacity_fluid = 4.18e+03
-  initial_fluid_viscosity = 1.0e-03
+  initial_fluid_viscosity = 0.0012389
   initial_thermal_conductivity_fluid = 0.65
   fluid_density_uo = fluid_density
   fluid_viscosity_uo = fluid_viscosity
@@ -20,14 +20,6 @@
   permeability_uo = permeability
   #supg_uo = supg
   #scaling_uo = scaling
-[]
-
-[MeshModifiers]
-[./POINT0]
-  type = AddExtraNodeset
-  new_boundary = 'point_0'
-  coord = '0.0 0.0 0.0'
-[../]
 []
 
 [Variables]
@@ -103,12 +95,6 @@
     boundary = front
     value = 101325
   [../]
-  [./p_pinned]
-    type = PresetBC
-    variable = pore_pressure
-    boundary = point_0
-    value = 0
-  [../]
   [./T0_top]
     type = PresetBC
     variable = temperature
@@ -119,7 +105,7 @@
     type = PresetBC
     variable = temperature
     boundary = 'bottom_mb bottom_mf bottom_r bottom_l'
-    value = 30
+    value = 19
   [../]
   [./T0_bottom_middle]
     type = PresetBC
@@ -139,13 +125,18 @@
   [./bottom]
     type = GolemMaterialTH
     block = 0
-    initial_porosity = 0.3
-    initial_permeability = 5.0e-11
-    initial_density_solid = 2360
-    initial_thermal_conductivity_solid = 10
-    initial_heat_capacity_solid = 1000
-    T_source_sink = 4e-06
-    fluid_modulus = 14285714.29
+    initial_density_fluid = 999.526088
+    initial_density_solid = 2480
+    initial_porosity = 0.4
+    #initial_thermal_conductivity_fluid = 0.65
+    initial_thermal_conductivity_solid = 1.233333
+    #initial_heat_capacity_fluid = 4180
+    initial_heat_capacity_solid = 920
+    initial_permeability = 1.0e-10
+    #initial_fluid_viscosity = 0.0012389
+    fluid_modulus = 4e+09
+    output_properties = 'fluid_density fluid_viscosity'
+    outputs = out
   [../]
 []
 
@@ -207,10 +198,9 @@
 
 [Executioner]
   type = Transient
-  scheme = crank-nicolson
   solve_type = Newton
-  num_steps  = 500
-  dt = 10000
+  num_steps  = 5000
+  dt = 15000
   l_max_its = 250
   nl_max_its = 100
   nl_abs_tol = 1e-05

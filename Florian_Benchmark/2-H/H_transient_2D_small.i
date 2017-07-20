@@ -5,7 +5,7 @@
 
 [Variables]
   [./pore_pressure]
-    initial_condition = 101325
+    initial_condition = 9.90333e6
   [../]
 []
 
@@ -26,7 +26,7 @@
 
 [GlobalParams]
   pore_pressure = pore_pressure
-  has_gravity = true
+  has_gravity = false
   gravity_acceleration = 9.80665
   fluid_density_uo = fluid_density
   fluid_viscosity_uo = fluid_viscosity
@@ -162,7 +162,7 @@
   solve_type =  'NEWTON' # 'PJFNK'
   # scheme = crank-nicolson
   num_steps  = 100
-  dt = 3.15576e+04
+  dt = 43200
   l_max_its = 300
   nl_max_its = 100
   nl_abs_tol = 1e-05
@@ -170,7 +170,7 @@
 []
 
 [Outputs]
-  interval = 10
+  #interval = 10
   [./out]
     type = Exodus
   [../]

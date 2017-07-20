@@ -4,7 +4,7 @@
 #BSUB -P thes0273
 
 ### Job name
-#BSUB -J golem_perth_basin_mauro
+#BSUB -J golem_perth_basin_mauro_parallel
 
 ### File / path where STDOUT & STDERR will be written
 ###    %J is the job ID, %I is the array ID
@@ -27,7 +27,7 @@
 #BSUB -a openmpi
 
 ### Request number of slots
-#BSUB -n 32
+#BSUB -n 36
 
 cd $HOME/projects/golem-devel/tests/perth_basin_mauro/
-mpirun -n 32 ../.././golem-opt -i transient_parallel.i
+mpirun -n 36 ../.././golem-opt -i transient_parallel.i
