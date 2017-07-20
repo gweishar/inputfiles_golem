@@ -1,4 +1,5 @@
 [Mesh]
+  type = FileMesh
   file = ../mesh/mesh_refined.e
   boundary_id =  '1 2 3 4 5 6'
   boundary_name = 'back front left right bottom top'
@@ -29,8 +30,6 @@
     variable = pore_pressure
   [../]
 []
-
-
 
 [BCs]
   [./p0_top]
@@ -80,6 +79,46 @@
   [../]
   [./permeability]
     type = GolemPermeabilityConstant
+  [../]
+[]
+
+[Preconditioning]
+  active = 'HYPRE'
+  [./ASM]
+    type = SMP
+    full = true
+    petsc_options = '-snes_ksp_ew'
+    petsc_options_iname = '-ksp_type
+                           -pc_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -ksp_max_it
+                           -sub_pc_type -sub_pc_factor_shift_type'
+    petsc_options_value = 'gmres
+                           asm
+                           1e-10 1e-10 200
+                           500
+                           lu NONZERO'
+  [../]
+  [./HYPRE]
+    type = SMP
+    full = true
+    petsc_options = '-snes_ksp_ew'
+    petsc_options_iname = '-ksp_type
+                           -pc_type -pc_hypre_type
+                           -snes_atol -snes_rtol -snes_max_it
+                           -ksp_gmres_restart
+                           -ksp_max_it
+                           -sub_pc_type -sub_pc_factor_shift_type
+                           -snes_ls
+                           -pc_hypre_boomeramg_strong_threshold'
+    petsc_options_value = 'gmres
+                           hypre boomeramg
+                           1e-10 1e-10 200
+                           201
+                           500
+                           lu NONZERO
+                           cubic
+                           0.7'
   [../]
 []
 
