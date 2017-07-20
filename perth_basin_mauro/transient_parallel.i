@@ -339,7 +339,7 @@
 [Executioner]
   type = Transient
   solve_type = Newton
-  num_steps  = 1000
+  num_steps  = 10000
   dt = 1 # 1 year
 []
 
