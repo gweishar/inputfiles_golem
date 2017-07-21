@@ -99,7 +99,7 @@
   [./entropy_production]
    type = EntropyProduction
    variable = entropy_production
-   #execute_on = timestep_end
+   execute_on = timestep_end
    temp = temperature
  [../]
 []
@@ -346,7 +346,7 @@
 [Outputs]
   [./out]
     type = Exodus
-    interval = 100
+    interval = 10
   [../]
   [./console]
     type = Console
