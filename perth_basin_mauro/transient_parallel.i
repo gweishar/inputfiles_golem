@@ -51,10 +51,10 @@
     order = CONSTANT
     family = MONOMIAL
   [../]
-  [./entropy_production]
-    order = CONSTANT
-    family = MONOMIAL
-  [../]
+  #[./entropy_production]
+  #  order = CONSTANT
+  #  family = MONOMIAL
+  #[../]
 []
 
 [Kernels]
@@ -96,12 +96,12 @@
     variable = vz
     component = 2
   [../]
-  [./entropy_production]
-   type = EntropyProduction
-   variable = entropy_production
-   execute_on = timestep_end
-   temp = temperature
- [../]
+ # [./entropy_production]
+ #  type = EntropyProduction
+ #  variable = entropy_production
+ #  execute_on = timestep_end
+ #  temp = temperature
+ #[../]
 []
 
 [BCs]
@@ -347,7 +347,7 @@
   [./out]
     type = Exodus
     interval = 10
-    file_base = transient_parallel_int100
+    #file_base = transient_parallel
   [../]
   [./console]
     type = Console
