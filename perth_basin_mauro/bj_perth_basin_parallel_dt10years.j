@@ -4,11 +4,11 @@
 #BSUB -P thes0273
 
 ### Job name
-#BSUB -J golem_perth_basin_mauro_parallel
+#BSUB -J golem_perth_basin_mauro_parallel_dt10years
 
 ### File / path where STDOUT & STDERR will be written
 ###    %J is the job ID, %I is the array ID
-#BSUB -o /home/gg188062/projects/golem-devel/job_logs/golem_transient_perth_basin_mauro_parallel.%J.%I
+#BSUB -o /home/gg188062/projects/golem-devel/job_logs/golem_transient_perth_basin_mauro_parallel_dt10years.%J.%I
 
 ### Send email when job is done
 #BSUB -u gweishar@gmail.com
@@ -30,4 +30,4 @@
 #BSUB -n 36
 
 cd $HOME/projects/golem-devel/inputfiles_golem/perth_basin_mauro/
-mpirun -n 36 ../.././golem-opt -i transient_parallel.i
+mpirun -n 36 ../.././golem-opt -i transient_parallel_dt10years.i

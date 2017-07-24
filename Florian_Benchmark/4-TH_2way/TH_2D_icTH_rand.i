@@ -1,26 +1,6 @@
-####  Golem Simple Geomodel ####
-
+# Set up for the Elder problem
 [Mesh]
-  file = ic/ic_refined_out.e
-[]
-
-[GlobalParams]
-  pore_pressure = pore_pressure
-  temperature = temperature
-  has_gravity = true
-  has_T_source_sink = true
-  #has_lumped_mass_matrix = true
-  gravity_acceleration = 9.8065
-  initial_density_fluid = 1000.0
-  initial_thermal_conductivity_fluid = 0.65
-  initial_heat_capacity_fluid = 4.18e+03
-  initial_fluid_viscosity = 1.0e-03
-  fluid_density_uo = fluid_density
-  fluid_viscosity_uo = fluid_viscosity
-  porosity_uo = porosity
-  permeability_uo = permeability
-  #supg_uo = supg
-  #scaling_uo = scaling
+  file = ic/ic_TH_out.e
 []
 
 [Variables]
@@ -29,121 +9,132 @@
     initial_from_file_timestep = 2
   [../]
   [./temperature]
-    initial_condition = 19
+    [./InitialCondition]
+      type = RandomIC
+      seed = 5
+      min = 19
+      max = 50
+    [../]
   [../]
 []
 
 [AuxVariables]
-  [./vx]
+  [./darcy_vx]
     order = CONSTANT
     family = MONOMIAL
   [../]
-  [./vy]
+  [./darcy_vy]
     order = CONSTANT
     family = MONOMIAL
   [../]
-  [./vz]
+  [./darcy_vz]
     order = CONSTANT
     family = MONOMIAL
   [../]
 []
 
+[GlobalParams]
+  pore_pressure = pore_pressure
+  temperature = temperature
+  has_gravity = true
+  gravity_acceleration = 9.80665
+  fluid_density_uo = fluid_density
+  fluid_viscosity_uo = fluid_viscosity
+  permeability_uo = permeability
+  porosity_uo = porosity
+  #supg_uo = supg
+[]
+
+[BCs]
+  [./p_top]
+    type = PresetBC
+    variable = pore_pressure
+    boundary = top
+    value = 101325
+  [../]
+  [./T_top]
+    type = PresetBC
+    variable = temperature
+    boundary = top
+    value =  19
+  [../]
+  [./T_bottom]
+    type = PresetBC
+    variable = temperature
+    boundary = bottom
+    value = 50
+  [../]
+  [./T_no_bc]
+    type = GolemConvectiveTHBC
+    variable = temperature
+    boundary = 'right left'
+  [../]
+[]
+
 [Kernels]
-  [./darcy]
-    type = GolemKernelH
+  #active = 'T_time darcy p_time T_adv'
+  [./p_time]
+    type = GolemKernelTimeH
     variable = pore_pressure
   [../]
-  [./P_time]
-    type = GolemKernelTimeH
+  [./darcy]
+    type = GolemKernelH
     variable = pore_pressure
   [../]
   [./T_time]
     type = GolemKernelTimeT
     variable = temperature
   [../]
-  [./T_dif]
-    type = GolemKernelT
-    variable = temperature
-  [../]
+  #[./T_cond]
+  #  type = GolemKernelT
+  #  variable = temperature
+  #[../]
   [./T_adv]
     type = GolemKernelTH
     variable = temperature
+    is_conservative = true
   [../]
 []
 
 [AuxKernels]
-  [./darcyx]
+  [./darcy_vx]
     type = GolemDarcyVelocity
-    variable = vx
+    variable = darcy_vx
     component = 0
+    execute_on = timestep_end
   [../]
-  [./darcyy]
+  [./darcy_vy]
     type = GolemDarcyVelocity
-    variable = vy
+    variable = darcy_vy
     component = 1
+    execute_on = timestep_end
   [../]
-  [./darcyz]
+  [./darcy_vz]
     type = GolemDarcyVelocity
-    variable = vz
+    variable = darcy_vz
     component = 2
-  [../]
-[]
-
-[BCs]
-  [./p0_top]
-    type = PresetBC
-    variable = pore_pressure
-    boundary = front
-    value = 101325
-  [../]
-  [./T0_top]
-    type = PresetBC
-    variable = temperature
-    boundary = front
-    value = 19
-  [../]
-  [./T0_bottom]
-    type = PresetBC
-    variable = temperature
-    boundary = back
-    value = 150
+    execute_on = timestep_end
   [../]
 []
 
 [Materials]
-  [./middle]
-    type = GolemMaterialTH
-    block = 1
-    initial_porosity = 0.21
-    initial_permeability = 3.0e-14
-    initial_density_solid = 2650
-    initial_thermal_conductivity_solid = 8.27
-    initial_heat_capacity_solid = 790
-    T_source_sink = 5e-07
-    fluid_modulus = 14285714.29
-  [../]
-  [./bottom]
+  [./unit_non_adaptive]
     type = GolemMaterialTH
     block = 0
-    initial_porosity = 0.2
-    initial_permeability = 3.0e-14
-    initial_density_solid = 2360
-    initial_thermal_conductivity_solid = 10.73
-    initial_heat_capacity_solid = 1000
-    T_source_sink = 4e-06
+    initial_density_fluid = 999.526088
+    initial_density_solid = 2480
+    initial_porosity = 0.1
+    initial_thermal_conductivity_fluid = 0.65
+    initial_thermal_conductivity_solid = 2.7 # was 2.7 before
+    initial_heat_capacity_fluid = 4180
+    initial_heat_capacity_solid = 920
+    initial_permeability = 2.0e-13
+    initial_fluid_viscosity = 0.0012389
     fluid_modulus = 14285714.29
-  [../]
-  [./top]
-    type = GolemMaterialTH
-    block = 2
-    initial_porosity = 0.15
-    initial_permeability = 3.0e-14
-    initial_density_solid = 2650
-    initial_thermal_conductivity_solid = 12.09
-    initial_heat_capacity_solid = 900
-    T_source_sink = 6e-07
-    fluid_modulus = 14285714.29
-  [../]
+    # fluid_modulus = 14285.71429
+    # output_properties = 'fluid_density fluid_viscosity'
+    # outputs = out
+ [../]
 []
 
 [UserObjects]
@@ -162,6 +153,7 @@
 []
 
 [Preconditioning]
+  active = ''
   [./FSP]
     type = FSP
     topsplit = 'HT'
@@ -177,11 +169,12 @@
        petsc_options_value = 'fgmres
                               1.0e-12 100
                               newtonls cp
-                              1.0e-04 0 1000'
+                              1 0 1000'
      [../]
      [./H]
        vars = 'pore_pressure'
-       petsc_options = '-ksp_converged_reason'
+       petsc_options = '-ksp_converged_reason
+                        -snes_ksp_ew'
        petsc_options_iname = '-ksp_type
                               -pc_type -pc_hypre_type
                               -ksp_rtol -ksp_max_it'
@@ -191,7 +184,8 @@
      [../]
      [./T]
        vars = 'temperature'
-       petsc_options = '-ksp_converged_reason'
+       petsc_options = '-ksp_converged_reason
+                        -snes_ksp_ew'
        petsc_options_iname = '-ksp_type
                               -pc_type -sub_pc_type -sub_pc_factor_levels
                               -ksp_rtol -ksp_max_it'
@@ -199,15 +193,22 @@
                               asm ilu 1
                               1.0e-04 500'
      [../]
- [../]
+  [../]
 []
 
 [Executioner]
   type = Transient
-  solve_type = Newton
+  solve_type =  'NEWTON' # 'PJFNK'
+  #scheme = crank-nicolson
   num_steps  = 15000
-  dt = 3.15576e+08
-  #3.15576e+07 # 1 year
+  #dt = 3.15576e+08
+  l_max_its = 250
+  nl_max_its = 100
+  nl_abs_tol = 1e-05
+  nl_rel_tol = 1e-10
+  petsc_options = '-snes_mf_operator' #-ksp_monitor'
+  petsc_options_iname = '-pc_type -pc_hypre_type'
+  petsc_options_value = 'hypre boomeramg'
   [./TimeStepper]
    type = IterationAdaptiveDT
    optimal_iterations = 6
@@ -215,18 +216,18 @@
    dt = 3.15576e+08
    growth_factor = 2
    cutback_factor = 0.5
- [../]
+  [../]
 []
 
 [Outputs]
+  #interval = 10
   [./out]
     type = Exodus
-    interval = 100
   [../]
   [./console]
     type = Console
     perf_log = true
-    output_linear = false
+    output_linear = true
     output_nonlinear = true
   [../]
 []

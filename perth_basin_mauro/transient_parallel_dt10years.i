@@ -276,7 +276,7 @@
 [UserObjects]
   [./scaling]
     type = GolemScaling
-    characteristic_time = 3.15576e+07
+    characteristic_time = 3.15576e+08
     characteristic_length = 1.0
     characteristic_temperature = 1.0
     characteristic_stress = 1.0e+06
@@ -339,7 +339,7 @@
 [Executioner]
   type = Transient
   solve_type = Newton
-  num_steps  = 10000
+  num_steps  = 1000
   dt = 1 # 1 year
 []
 
@@ -347,7 +347,7 @@
   [./out]
     type = Exodus
     interval = 10
-    file_base = transient_parallel_int100
+    #file_base = transient_parallel_int100
   [../]
   [./console]
     type = Console

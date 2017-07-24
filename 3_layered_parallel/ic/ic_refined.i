@@ -43,7 +43,7 @@
 [Materials]
   [./middle]
     type = GolemMaterialH
-    block = 0
+    block = 1
     initial_porosity = 0.21
     initial_permeability = 3.0e-14
     initial_density_solid = 2650
@@ -51,7 +51,7 @@
   [../]
   [./bottom]
     type = GolemMaterialH
-    block = 1
+    block = 0
     initial_porosity = 0.2
     initial_permeability = 3.0e-14
     initial_density_solid = 2360
@@ -83,7 +83,7 @@
 []
 
 [Preconditioning]
-  active = 'HYPRE'
+  active = ''
   [./ASM]
     type = SMP
     full = true
