@@ -221,7 +221,7 @@
     initial_permeability = 1.0e-18
     initial_density_solid = 2700
     initial_thermal_conductivity_solid = 3.2
-    #initial_thermal_conductivity_fluid = 3.2 #calculated by hand
+    initial_thermal_conductivity_fluid = 3.2 #calculated by hand
     initial_heat_capacity_solid = 980
     T_source_sink = 4e-06
     fluid_modulus = 14285714.29
@@ -244,7 +244,7 @@
     initial_permeability = 1.2e-13
     initial_density_solid = 2180
     initial_thermal_conductivity_solid = 4.3
-    #initial_thermal_conductivity_fluid = 3.2 #calculated by hand
+    initial_thermal_conductivity_fluid = 3.2 #calculated by hand
     initial_heat_capacity_solid = 775
     T_source_sink = 6e-07
     fluid_modulus = 285714285.7

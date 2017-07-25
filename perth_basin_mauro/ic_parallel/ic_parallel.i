@@ -91,7 +91,7 @@
     type = PresetBC
     variable = temperature
     boundary = front
-    value = 25
+    value = 19
   [../]
   [./T_bottom]
     type = NeumannBC
