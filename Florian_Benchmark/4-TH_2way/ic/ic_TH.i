@@ -12,6 +12,7 @@
 []
 
 [GlobalParams]
+
   pore_pressure = pore_pressure
   has_gravity = true
   gravity_acceleration = 9.80665

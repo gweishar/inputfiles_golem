@@ -9,12 +9,15 @@
     initial_from_file_timestep = 2
   [../]
   [./temperature]
-    [./InitialCondition]
-      type = RandomIC
-      seed = 5
-      min = 19
-      max = 50
-    [../]
+    initial_condition = 19
+    #initial_from_file_var = temperature
+    #initial_from_file_timestep = 2
+    #[./InitialCondition]
+    #  type = RandomIC
+    #  seed = 5
+    #  min = 19
+    #  max = 50
+    #[../]
   [../]
 []
 
@@ -42,33 +45,34 @@
   fluid_viscosity_uo = fluid_viscosity
   permeability_uo = permeability
   porosity_uo = porosity
+  scaling_uo = scaling
   #supg_uo = supg
 []
 
 [BCs]
   [./p_top]
-    type = PresetBC
+    type = DirichletBC
     variable = pore_pressure
     boundary = top
-    value = 101325
+    value = 1.013 #101325 # 0.1
   [../]
   [./T_top]
-    type = PresetBC
+    type = DirichletBC
     variable = temperature
     boundary = top
     value =  19
   [../]
   [./T_bottom]
-    type = PresetBC
+    type = DirichletBC
     variable = temperature
     boundary = bottom
     value = 50
   [../]
-  [./T_no_bc]
-    type = GolemConvectiveTHBC
-    variable = temperature
-    boundary = 'right left'
-  [../]
+  #[./T_no_bc]
+  #  type = GolemConvectiveTHBC
+  #  variable = temperature
+  #  boundary = 'right left'
+  #[../]
 []
 
 [Kernels]
@@ -85,14 +89,14 @@
     type = GolemKernelTimeT
     variable = temperature
   [../]
-  #[./T_cond]
-  #  type = GolemKernelT
-  #  variable = temperature
-  #[../]
+  [./T_cond]
+    type = GolemKernelT
+    variable = temperature
+  [../]
   [./T_adv]
     type = GolemKernelTH
     variable = temperature
-    is_conservative = true
+    is_conservative = false
   [../]
 []
 
@@ -138,6 +142,13 @@
 []
 
 [UserObjects]
+  [./scaling]
+    type = GolemScaling
+    characteristic_time = 3.15576e+07
+    characteristic_length = 1.0
+    characteristic_temperature = 1.0
+    characteristic_stress = 1.0e+06
+  [../]
   [./fluid_density]
     type = GolemFluidDensityIAPWS
   [../]
@@ -153,7 +164,7 @@
 []
 
 [Preconditioning]
-  active = ''
+  #active = ''
   [./FSP]
     type = FSP
     topsplit = 'HT'
@@ -198,7 +209,7 @@
 
 [Executioner]
   type = Transient
-  solve_type =  'NEWTON' # 'PJFNK'
+  solve_type =  'NEWTON' #'JFNK'
   #scheme = crank-nicolson
   num_steps  = 15000
   #dt = 3.15576e+08
@@ -206,14 +217,14 @@
   nl_max_its = 100
   nl_abs_tol = 1e-05
   nl_rel_tol = 1e-10
-  petsc_options = '-snes_mf_operator' #-ksp_monitor'
-  petsc_options_iname = '-pc_type -pc_hypre_type'
-  petsc_options_value = 'hypre boomeramg'
+  #petsc_options = '-snes_mf_operator' #-ksp_monitor'
+  #petsc_options_iname = '-pc_type -pc_hypre_type'
+  #petsc_options_value = 'hypre boomeramg'
   [./TimeStepper]
    type = IterationAdaptiveDT
    optimal_iterations = 6
    iteration_window = 1
-   dt = 3.15576e+08
+   dt = 1 #3.15576e+07 #10
    growth_factor = 2
    cutback_factor = 0.5
   [../]

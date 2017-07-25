@@ -29,5 +29,7 @@
 ### Request number of slots
 #BSUB -n 36
 
-cd $HOME/projects/golem-devel/inputfiles_golem/perth_basin_mauro/
+cd $HOME/projects/golem-devel/inputfiles_golem/perth_basin_mauro/ic_parallel/
+mpirun -n 36 ../../.././golem-opt -i ic_parallel.i
+cd ..
 mpirun -n 36 ../.././golem-opt -i transient_parallel.i
