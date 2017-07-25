@@ -27,7 +27,7 @@
 #BSUB -a openmpi
 
 ### Request number of slots
-#BSUB -n 8
+#BSUB -n 36
 
 cd $HOME/projects/golem-devel/inputfiles_golem/perth_basin_mauro/
-mpirun -n 8 ../.././golem-opt -i transient_parallel_dt10years.i
+mpirun -n 36 ../.././golem-opt -i transient_parallel_dt10years.i
