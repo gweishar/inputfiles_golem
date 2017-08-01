@@ -106,7 +106,7 @@
     value = 19
   [../]
   [./T_bottom]
-    type = GolemHeatFlowBC
+    type = NeumannBC
     variable = temperature
     boundary = bottom
     value = 0.03

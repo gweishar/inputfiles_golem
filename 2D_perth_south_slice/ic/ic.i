@@ -71,7 +71,7 @@
     type = DirichletBC
     variable = pore_pressure
     boundary = top
-    value = 0.101325
+    value = 101325
   [../]
   [./T0_top]
     type = DirichletBC
@@ -80,7 +80,7 @@
     value = 19
   [../]
   [./T_bottom]
-    type = GolemHeatFlowBC
+    type = NeumannBC
     variable = temperature
     boundary = bottom
     value = 0.03
