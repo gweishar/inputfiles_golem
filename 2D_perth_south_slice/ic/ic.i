@@ -92,7 +92,7 @@
     type = GolemMaterialTH
     block = 'basement'
     initial_porosity = 0.01
-    initial_permeability = 1.0e-18
+    initial_permeability = 1.0e-16
     initial_density_solid = 2700
     initial_thermal_conductivity_solid = 3.2
     initial_heat_capacity_solid = 980
@@ -102,7 +102,7 @@
     type = GolemMaterialTH
     block = 'coal_layer'
     initial_porosity = 0.1
-    initial_permeability = 1.2e-17
+    initial_permeability = 1.2e-15
     initial_density_solid = 2360
     initial_thermal_conductivity_solid = 4.1
     initial_heat_capacity_solid = 1000
@@ -124,7 +124,7 @@
     type = GolemMaterialTH
     block = 'aquifer_near_surface'
     initial_porosity = 0.3
-    initial_permeability = 1.2e-12
+    initial_permeability = 1.2e-14
     initial_density_solid = 2100
     initial_thermal_conductivity_solid = 1.6
     #initial_thermal_conductivity_fluid = 3.2 #calculated by hand
@@ -136,7 +136,7 @@
     type = GolemMaterialTH
     block = 'surface_layers'
     initial_porosity = 0.1
-    initial_permeability = 1.2e-12
+    initial_permeability = 1.2e-14
     initial_density_solid = 2360
     initial_thermal_conductivity_solid = 3.2
     initial_heat_capacity_solid = 980
@@ -147,7 +147,7 @@
     type = GolemMaterialTH
     block = 'aquifer_subsurface'
     initial_porosity = 0.2
-    initial_permeability = 1.2e-13
+    initial_permeability = 1.2e-14
     initial_density_solid = 2180
     initial_thermal_conductivity_solid = 4.3
     initial_thermal_conductivity_fluid = 3.2 #calculated by hand
@@ -159,7 +159,7 @@
     type = GolemMaterialTH
     block = 'moho'
     initial_porosity = 0.01
-    initial_permeability = 1.2e-18
+    initial_permeability = 1.2e-16
     initial_density_solid = 2700
     initial_thermal_conductivity_solid = 3.2
     initial_heat_capacity_solid = 980
